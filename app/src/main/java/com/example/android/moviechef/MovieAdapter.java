@@ -3,6 +3,7 @@ package com.example.android.moviechef;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -35,9 +36,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // TODO: fill out onCreateViewHolder
-        return null;
+    public MovieAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        int listItemId = R.layout.movie_list_item;
+        LayoutInflater inflater = LayoutInflater.from(context);
+
+        View view = inflater.inflate(listItemId, parent, false);
+
+        return new MovieAdapterViewHolder(view);
     }
 
     @Override
