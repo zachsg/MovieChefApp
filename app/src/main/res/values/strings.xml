@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MovieChef</string>
+
+    <string name="iv_movie_cover">The cover photo for the given movie</string>
 </resources>
