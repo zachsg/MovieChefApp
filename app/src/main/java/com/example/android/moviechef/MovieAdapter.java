@@ -1,16 +1,20 @@
 package com.example.android.moviechef;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 /**
  * Created by zachg on 5/6/17.
  */
 
-public class MovieAdapter extends RecyclerView.Adapter {
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapterViewHolder> {
 
     private Movie[] mMoviesData;
 
@@ -37,17 +41,27 @@ public class MovieAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        // TODO: fill out onBindViewHolder
+    public void onBindViewHolder(MovieAdapterViewHolder holder, int position) {
+        // Get current movie's image URL
+        Movie currentMovie = mMoviesData[position];
+        String imageUrl = holder.getImageUrl(currentMovie);
+
+        // Set proper image for given movie
+        Context context = holder.getmImageView().getContext();
+        ImageView imageView = holder.getmImageView();
+        Picasso.with(context).load(imageUrl).into(imageView);
     }
 
     @Override
     public int getItemCount() {
-        // TODO: fill out getItemCount
-        return 0;
+        if (mMoviesData == null) {
+            return 0;
+        }
+
+        return mMoviesData.length;
     }
 
-    private class MovieAdapterViewHolder extends RecyclerView.ViewHolder
+    protected class MovieAdapterViewHolder extends RecyclerView.ViewHolder
                                       implements View.OnClickListener {
 
         private final ImageView mImageView;
@@ -60,6 +74,19 @@ public class MovieAdapter extends RecyclerView.Adapter {
 
         public ImageView getmImageView() {
             return mImageView;
+        }
+
+        /**
+         * Build & return the full URL for a given movie's cover image.
+         * @param movie The movie for which the image will be built.
+         * @return The full URL for given movie's cover image.
+         */
+        public String getImageUrl(Movie movie) {
+            String baseUrl = Resources.getSystem().getString(R.string.base_url);
+            String imageSize = Resources.getSystem().getString(R.string.image_size_url);
+            String imageUrl = movie.getmImageUrl();
+
+            return baseUrl + imageSize + imageUrl;
         }
 
         @Override

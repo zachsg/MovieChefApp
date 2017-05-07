@@ -2,4 +2,7 @@
     <string name="app_name">MovieChef</string>
 
     <string name="iv_movie_cover">The cover photo for the given movie</string>
+
+    <string name="base_url">http://image.tmdb.org/t/p/</string>
+    <string name="image_size_url">w185</string>
 </resources>
