@@ -64,7 +64,9 @@ public class MovieAdapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View v) {
-            // TODO: fill out onClick
+            int position = getAdapterPosition();
+            Movie currentMovie = mMoviesData[position];
+            mClickHandler.onClick(currentMovie);
         }
     }
 }
