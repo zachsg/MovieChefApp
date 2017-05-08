@@ -28,8 +28,8 @@ public class MovieGridActivity extends AppCompatActivity
 
     private static final int SPAN_COUNT = 2;
 
-    private static final String POPULAR_MOVIES = "/movie/popular";
-    private static final String TOP_RATED_MOVIES = "/movie/top_rated";
+    private static final String POPULAR_MOVIES = "popular";
+    private static final String TOP_RATED_MOVIES = "top_rated";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
