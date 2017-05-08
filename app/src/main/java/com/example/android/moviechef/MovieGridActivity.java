@@ -12,6 +12,9 @@ import android.view.MenuItem;
 
 import com.example.android.moviechef.utilities.NetworkUtils;
 
+import java.io.IOException;
+import java.net.URL;
+
 public class MovieGridActivity extends AppCompatActivity
                             implements MovieAdapter.MovieAdapterOnClickHandler {
 
@@ -77,12 +80,24 @@ public class MovieGridActivity extends AppCompatActivity
 
         @Override
         protected Movie[] doInBackground(String... params) {
-            // If sort by pop/top rated was requested, build that into URL
+            URL url = null;
+
+            // If sort by popular/top rated was requested, build that into URL
             if (params.length == 1) {
-                String url = NetworkUtils.buildUrl(params[0]);
+                url = NetworkUtils.buildUrl(params[0]);
             } else {
-                String url = NetworkUtils.buildUrl(null);
+                url = NetworkUtils.buildUrl(null);
             }
+
+            String jsonResponse = "";
+            try {
+                jsonResponse = NetworkUtils.getResponseFromHttpUrl(url);
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+                return null;
+            }
+
+
 
             return null;
         }

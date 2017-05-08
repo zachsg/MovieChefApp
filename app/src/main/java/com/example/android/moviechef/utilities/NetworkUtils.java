@@ -1,8 +1,11 @@
 package com.example.android.moviechef.utilities;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
@@ -15,24 +18,41 @@ public final class NetworkUtils {
     private static final String LOG_TAG = NetworkUtils.class.getSimpleName();
 
     private static final String MOVIES_STARTER_URL =
-            "https://api.themoviedb.org/3/movie/550?api_key=";
+            "https://api.themoviedb.org/3/movie/";
 
+    private static final String API_KEY_QUERY = "?api_key=";
     // Be sure to add your API_KEY here
-    private static final String API_KEY = "";
+    private static final String API_KEY_BASE = "";
+    private static final String API_KEY = API_KEY_QUERY + API_KEY_BASE;
 
-    private static final String MOVIES_BASE_URL = MOVIES_STARTER_URL + API_KEY;
+    private static final String LANGUAGE = "&language=en-US";
 
-    private static final String POPULAR_MOVIES = "/movie/popular";
-    private static final String TOP_RATED_MOVIES = "/movie/top_rated";
+    private static final String MOVIES_BASE_URL_A = MOVIES_STARTER_URL;
+    private static final String MOVIES_BASE_URL_B = API_KEY + LANGUAGE;
 
-    public static String buildUrl(String sort) {
+    private static final String POPULAR_MOVIES = "popular";
+    private static final String TOP_RATED_MOVIES = "top_rated";
+
+    public static URL buildUrl(String sort) {
+        String urlString = "";
+
         if (sort.equals(POPULAR_MOVIES)) {
-            return MOVIES_BASE_URL + POPULAR_MOVIES;
+            urlString = MOVIES_BASE_URL_A + POPULAR_MOVIES + MOVIES_BASE_URL_B;
         } else if (sort.equals(TOP_RATED_MOVIES)) {
-            return MOVIES_BASE_URL + TOP_RATED_MOVIES;
+            urlString = MOVIES_BASE_URL_A + TOP_RATED_MOVIES + MOVIES_BASE_URL_B;
         } else {
-            return MOVIES_BASE_URL;
+            urlString = MOVIES_BASE_URL_A + MOVIES_BASE_URL_B;
         }
+
+        URL url = null;
+        try {
+            url = new URL(urlString);
+            Log.v(LOG_TAG, "Built URL is " + url);
+        } catch (MalformedURLException mue) {
+            mue.printStackTrace();
+        }
+
+        return url;
     }
 
     /**
