@@ -68,6 +68,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
         return mMoviesData.length;
     }
 
+    public void setmMoviesData(Movie[] movies) {
+        mMoviesData = movies;
+        notifyDataSetChanged();
+    }
+
     public class MovieAdapterViewHolder extends RecyclerView.ViewHolder
                                      implements OnClickListener {
 

@@ -1,6 +1,7 @@
 package com.example.android.moviechef;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -29,11 +30,31 @@ public class MovieGridActivity extends AppCompatActivity
 
         mMovieAdapter = new MovieAdapter(this);
         mRecyclerView.setAdapter(mMovieAdapter);
+        loadMovies();
+    }
+
+    private void loadMovies() {
+        new FetchMoviesTask().execute();
     }
 
     @Override
     public void onClick(Movie movie) {
         Context context = this;
         // TODO: do stuff when movie clicked ;)
+    }
+
+    private class FetchMoviesTask extends AsyncTask<Movie, Void, Movie[]> {
+
+        @Override
+        protected Movie[] doInBackground(Movie... params) {
+            return new Movie[0];
+        }
+
+        @Override
+        protected void onPostExecute(Movie[] movies) {
+            if (movies != null) {
+                mMovieAdapter.setmMoviesData(movies);
+            }
+        }
     }
 }
