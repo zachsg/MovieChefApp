@@ -5,4 +5,8 @@
 
     <string name="base_url">http://image.tmdb.org/t/p/</string>
     <string name="image_size_url">w185</string>
+
+    <!-- Menu options -->
+    <string name="sort_popular">Sort by most popular</string>
+    <string name="sort_top_rated">Sort by top rated</string>
 </resources>
