@@ -25,11 +25,14 @@ public final class NetworkUtils {
     private static final String API_KEY_BASE = "";
     private static final String API_KEY = API_KEY_QUERY + API_KEY_BASE;
 
+    // Set language preference in query
     private static final String LANGUAGE = "&language=en-US";
 
+    // Based URL strings, Part 1 (A) & Part 2 (B)
     private static final String MOVIES_BASE_URL_A = MOVIES_STARTER_URL;
     private static final String MOVIES_BASE_URL_B = API_KEY + LANGUAGE;
 
+    // Sorting methods
     private static final String POPULAR_MOVIES = "popular";
     private static final String TOP_RATED_MOVIES = "top_rated";
 
