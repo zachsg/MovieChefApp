@@ -26,7 +26,7 @@ public final class NetworkUtils {
     private static final String API_KEY = API_KEY_QUERY + API_KEY_BASE;
 
     // Set language preference in query
-    private static final String LANGUAGE = "&language=en-US";
+    private static final String LANGUAGE = "&language=en-US&page=1";
 
     // Based URL strings, Part 1 (A) & Part 2 (B)
     private static final String MOVIES_BASE_URL_A = MOVIES_STARTER_URL;
@@ -35,16 +35,24 @@ public final class NetworkUtils {
     // Sorting methods
     private static final String POPULAR_MOVIES = "popular";
     private static final String TOP_RATED_MOVIES = "top_rated";
+    private static final String LATEST_MOVIES = "latest";
 
     public static URL buildUrl(String sort) {
         String urlString = "";
 
-        if (sort.equals(POPULAR_MOVIES)) {
-            urlString = MOVIES_BASE_URL_A + POPULAR_MOVIES + MOVIES_BASE_URL_B;
-        } else if (sort.equals(TOP_RATED_MOVIES)) {
-            urlString = MOVIES_BASE_URL_A + TOP_RATED_MOVIES + MOVIES_BASE_URL_B;
+        if (sort == null) {
+            urlString = urlString = MOVIES_BASE_URL_A + LATEST_MOVIES + MOVIES_BASE_URL_B;
         } else {
-            urlString = MOVIES_BASE_URL_A + MOVIES_BASE_URL_B;
+            switch (sort) {
+                case POPULAR_MOVIES:
+                    urlString = MOVIES_BASE_URL_A + POPULAR_MOVIES + MOVIES_BASE_URL_B;
+                    break;
+                case TOP_RATED_MOVIES:
+                    urlString = MOVIES_BASE_URL_A + TOP_RATED_MOVIES + MOVIES_BASE_URL_B;
+                    break;
+                default:
+                    urlString = MOVIES_BASE_URL_A + LATEST_MOVIES + MOVIES_BASE_URL_B;
+            }
         }
 
         URL url = null;
