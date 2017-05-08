@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -27,7 +28,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     /**
      * Interface for handling clicks of given movie item.
      */
-    private interface MovieAdapterOnClickHandler {
+    public interface MovieAdapterOnClickHandler {
         void onClick(Movie movie);
     }
 
@@ -67,8 +68,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
         return mMoviesData.length;
     }
 
-    protected class MovieAdapterViewHolder extends RecyclerView.ViewHolder
-                                      implements View.OnClickListener {
+    public class MovieAdapterViewHolder extends RecyclerView.ViewHolder
+                                     implements OnClickListener {
 
         private final ImageView mImageView;
 
