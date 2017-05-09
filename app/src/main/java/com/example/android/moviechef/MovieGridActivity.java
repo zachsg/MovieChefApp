@@ -18,7 +18,6 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MovieGridActivity extends AppCompatActivity
@@ -103,8 +102,6 @@ public class MovieGridActivity extends AppCompatActivity
                 return null;
             }
 
-            Log.v(LOG_TAG, "JSON response: " + jsonResponse);
-
             Movie[] movies = null;
             try {
                 List<Movie> moviesList = JsonUtils.getMoviesFromJson(MovieGridActivity.this, jsonResponse);
@@ -113,9 +110,6 @@ public class MovieGridActivity extends AppCompatActivity
                 jse.printStackTrace();
                 return null;
             }
-
-            //Log.v(LOG_TAG, "First movie: " + movies.length);
-            //Log.v(LOG_TAG, "First movie: " + movies[0].toString());
 
             return movies;
         }

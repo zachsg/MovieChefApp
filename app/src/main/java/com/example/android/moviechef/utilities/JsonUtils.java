@@ -32,18 +32,13 @@ public final class JsonUtils {
             JSONArray moviesJsonArray = moviesJsonFull.getJSONArray(RESULTS);
 
             for (int i = 0; i < moviesJsonArray.length(); i++) {
-                String title = "";
-                String imageUrl = "";
-                String overview = "";
-                String id = "";
-
                 // Get a single movie
                 JSONObject jsonMovie = moviesJsonArray.getJSONObject(i);
 
-                title = setValueForKey(jsonMovie, "title");
-                imageUrl = setValueForKey(jsonMovie, "poster_path");
-                overview = setValueForKey(jsonMovie, "overview");
-                id = setValueForKey(jsonMovie, "id");
+                String title = setValueForKey(jsonMovie, "title");
+                String imageUrl = setValueForKey(jsonMovie, "poster_path");
+                String overview = setValueForKey(jsonMovie, "overview");
+                String id = setValueForKey(jsonMovie, "id");
 
                 Log.v("JsonUtils", title + "\n" + imageUrl + "\n" + overview + "\n" + id);
 
