@@ -35,7 +35,7 @@ public final class NetworkUtils {
     // Sorting methods
     private static final String POPULAR_MOVIES = "popular";
     private static final String TOP_RATED_MOVIES = "top_rated";
-    private static final String LATEST_MOVIES = "latest";
+    private static final String LATEST_MOVIES = "now_playing";
 
     public static URL buildUrl(String sort) {
         String urlString = "";

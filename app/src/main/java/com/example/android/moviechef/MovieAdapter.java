@@ -20,6 +20,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
 
     private Movie[] mMoviesData;
 
+    private Context mContext;
+
     /**
      * Allow Activity to interact with the RecyclerView.
      */
@@ -32,7 +34,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
         void onClick(Movie movie);
     }
 
-    public MovieAdapter(MovieAdapterOnClickHandler clickHandler) {
+    public MovieAdapter(Context context, MovieAdapterOnClickHandler clickHandler) {
+        mContext = context;
         mClickHandler = clickHandler;
     }
 
@@ -94,8 +97,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
          * @return The full URL for given movie's cover image.
          */
         public String getImageUrl(Movie movie) {
-            String baseUrl = Resources.getSystem().getString(R.string.base_url);
-            String imageSize = Resources.getSystem().getString(R.string.image_size_url);
+            String baseUrl = mContext.getString(R.string.base_url);
+            String imageSize = mContext.getString(R.string.image_size_url);
             String imageUrl = movie.getmImageUrl();
 
             return baseUrl + imageSize + imageUrl;

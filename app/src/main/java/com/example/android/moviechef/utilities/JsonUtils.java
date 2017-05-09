@@ -1,6 +1,7 @@
 package com.example.android.moviechef.utilities;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.android.moviechef.Movie;
 
@@ -8,19 +9,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Utility functions to help with handling JSON received from themoviedb.org API.
  */
 
 public final class JsonUtils {
 
-    public static Movie[] getMoviesFromJson(Context context, String moviesString)
+    public static List<Movie> getMoviesFromJson(Context context, String moviesString)
         throws JSONException {
 
         // Base level array of all movies returned by query
         final String RESULTS = "results";
 
-        Movie[] movies = null;
+        List<Movie> movies = new ArrayList<>();
 
         JSONObject moviesJsonFull = new JSONObject(moviesString);
         if (moviesJsonFull.has(RESULTS)) {
@@ -36,20 +40,18 @@ public final class JsonUtils {
                 // Get a single movie
                 JSONObject jsonMovie = moviesJsonArray.getJSONObject(i);
 
-
                 title = setValueForKey(jsonMovie, "title");
                 imageUrl = setValueForKey(jsonMovie, "poster_path");
                 overview = setValueForKey(jsonMovie, "overview");
                 id = setValueForKey(jsonMovie, "id");
 
+                Log.v("JsonUtils", title + "\n" + imageUrl + "\n" + overview + "\n" + id);
+
                 Movie movie = new Movie(title, imageUrl, overview, id);
-                try {
-                    movies[i] = movie;
-                } catch (NullPointerException npe) {
-                    npe.printStackTrace();
-                    movies[i] = null;
-                }
+                movies.add(i, movie);
             }
+        } else {
+            Log.v("JsonUtils", "No valid movies found in JSON :(");
         }
         return movies;
     }

@@ -11,10 +11,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.example.android.moviechef.utilities.JsonUtils;
 import com.example.android.moviechef.utilities.NetworkUtils;
+
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MovieGridActivity extends AppCompatActivity
                             implements MovieAdapter.MovieAdapterOnClickHandler {
@@ -40,7 +45,7 @@ public class MovieGridActivity extends AppCompatActivity
         mGridLayoutManager = new GridLayoutManager(this, SPAN_COUNT);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
 
-        mMovieAdapter = new MovieAdapter(this);
+        mMovieAdapter = new MovieAdapter(MovieGridActivity.this, this);
         mRecyclerView.setAdapter(mMovieAdapter);
         loadMovies();
     }
@@ -100,7 +105,19 @@ public class MovieGridActivity extends AppCompatActivity
 
             Log.v(LOG_TAG, "JSON response: " + jsonResponse);
 
-            return null;
+            Movie[] movies = null;
+            try {
+                List<Movie> moviesList = JsonUtils.getMoviesFromJson(MovieGridActivity.this, jsonResponse);
+                movies = moviesList.toArray(new Movie[0]);
+            } catch (JSONException jse) {
+                jse.printStackTrace();
+                return null;
+            }
+
+            //Log.v(LOG_TAG, "First movie: " + movies.length);
+            //Log.v(LOG_TAG, "First movie: " + movies[0].toString());
+
+            return movies;
         }
 
         @Override
