@@ -1,6 +1,8 @@
 package com.example.android.moviechef;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +12,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.android.moviechef.utilities.JsonUtils;
 import com.example.android.moviechef.utilities.NetworkUtils;
@@ -27,6 +32,8 @@ public class MovieGridActivity extends AppCompatActivity
 
     private RecyclerView mRecyclerView;
     private GridLayoutManager mGridLayoutManager;
+    private TextView mEmptyStateView;
+    private ProgressBar mProgressBar;
 
     private MovieAdapter mMovieAdapter;
 
@@ -40,16 +47,33 @@ public class MovieGridActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_grid);
 
+        mEmptyStateView = (TextView) findViewById(R.id.tv_empty_state);
+
+        mProgressBar = (ProgressBar) findViewById(R.id.pb);
+
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_movie_grid);
         mGridLayoutManager = new GridLayoutManager(this, SPAN_COUNT);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
 
         mMovieAdapter = new MovieAdapter(MovieGridActivity.this, this);
         mRecyclerView.setAdapter(mMovieAdapter);
-        loadMovies();
+
+        // Check on network state (connected or not)
+        if (!NetworkUtils.isNetworkUp(this)) {
+            mEmptyStateView.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.INVISIBLE);
+        } else {
+            mEmptyStateView.setVisibility(View.INVISIBLE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+            loadMovies();
+        }
     }
 
     private void loadMovies() {
+        // Show progress bar
+        mProgressBar.setVisibility(View.VISIBLE);
+
+        // Kick off task to load movies data
         new FetchMoviesTask().execute();
     }
 
@@ -68,11 +92,28 @@ public class MovieGridActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (!NetworkUtils.isNetworkUp(this)) {
+            mEmptyStateView.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.INVISIBLE);
+            return false;
+        } else {
+            mEmptyStateView.setVisibility(View.INVISIBLE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+        }
+
         switch (item.getItemId()) {
             case R.id.sort_popular:
+                // Show progress bar
+                mProgressBar.setVisibility(View.VISIBLE);
+
+                // Kick off task to load popular movies data
                 new FetchMoviesTask().execute(POPULAR_MOVIES);
                 break;
             case R.id.sort_top_rated:
+                // Show progress bar
+                mProgressBar.setVisibility(View.VISIBLE);
+
+                // Kick off task to load top rated movies data
                 new FetchMoviesTask().execute(TOP_RATED_MOVIES);
                 break;
             default:
@@ -116,6 +157,9 @@ public class MovieGridActivity extends AppCompatActivity
 
         @Override
         protected void onPostExecute(Movie[] movies) {
+            // Hide progress bar
+            mProgressBar.setVisibility(View.INVISIBLE);
+
             if (movies != null) {
                 mMovieAdapter.setmMoviesData(movies);
             }
