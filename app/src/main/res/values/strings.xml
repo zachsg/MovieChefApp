@@ -9,4 +9,7 @@
     <!-- Menu options -->
     <string name="sort_popular">Sort by most popular</string>
     <string name="sort_top_rated">Sort by top rated</string>
+
+    <!-- Empty/Error states -->
+    <string name="empty_state">No data could be loaded.  Check your internet connection.</string>
 </resources>

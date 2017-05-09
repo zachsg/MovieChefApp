@@ -1,7 +1,5 @@
 package com.example.android.moviechef.utilities;
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -17,8 +15,7 @@ public final class NetworkUtils {
 
     private static final String LOG_TAG = NetworkUtils.class.getSimpleName();
 
-    private static final String MOVIES_STARTER_URL =
-            "https://api.themoviedb.org/3/movie/";
+    private static final String MOVIES_STARTER_URL = "https://api.themoviedb.org/3/movie/";
 
     private static final String API_KEY_QUERY = "?api_key=";
     // Be sure to add your API_KEY here
@@ -41,7 +38,7 @@ public final class NetworkUtils {
         String urlString = "";
 
         if (sort == null) {
-            urlString = urlString = MOVIES_BASE_URL_A + LATEST_MOVIES + MOVIES_BASE_URL_B;
+            urlString = MOVIES_BASE_URL_A + LATEST_MOVIES + MOVIES_BASE_URL_B;
         } else {
             switch (sort) {
                 case POPULAR_MOVIES:
@@ -58,7 +55,6 @@ public final class NetworkUtils {
         URL url = null;
         try {
             url = new URL(urlString);
-            Log.v(LOG_TAG, "Built URL is " + url);
         } catch (MalformedURLException mue) {
             mue.printStackTrace();
         }
