@@ -59,7 +59,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             mDurationTV.setText(movie.getmDuration());
         }
         if (movie.getmAvgRating() != null ) {
-            mRatingTV.setText(movie.getmAvgRating().toString());
+            mRatingTV.setText(movie.getmAvgRating().toString() + "/10");
         }
         if (movie.getmOverview() != null) {
             mOverviewTV.setText(movie.getmOverview());
