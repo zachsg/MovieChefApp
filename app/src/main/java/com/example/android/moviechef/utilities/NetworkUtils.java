@@ -26,9 +26,9 @@ public final class NetworkUtils {
 
     private static final String MOVIES_STARTER_URL = "https://api.themoviedb.org/3/movie/";
 
-    private static final String API_KEY_QUERY = "?api_key=";
-    // Be sure to add your API_KEY here
+    // TODO: Be sure to add your API_KEY here
     private static final String API_KEY_BASE = "";
+    private static final String API_KEY_QUERY = "?api_key=";
     private static final String API_KEY = API_KEY_QUERY + API_KEY_BASE;
 
     // Set language preference in query
@@ -43,6 +43,12 @@ public final class NetworkUtils {
     private static final String TOP_RATED_MOVIES = "top_rated";
     private static final String LATEST_MOVIES = "now_playing";
 
+    /**
+     * Build URL for themoviedb.org API based on passed parameter.
+     * @param sort Determines how the API query is constructed.  Can either be by Top Rated
+     *             films, Most Popular films, or by a specific film's ID.
+     * @return The fully built URL.
+     */
     public static URL buildUrl(String sort) {
         String urlString = "";
 
@@ -111,6 +117,12 @@ public final class NetworkUtils {
         return networkInfo != null && networkInfo.isConnected();
     }
 
+    /**
+     * Loads the correct movie cover photo into the proper imageView.
+     * @param context Context of calling activity (to pull necessary Strings).
+     * @param imageView The ImageView into which the photo should be loaded.
+     * @param movie The movie from which the photo should be pulled.
+     */
     public static void loadImage(Context context, ImageView imageView, Movie movie) {
         String url = getImageUrl(context, movie);
 
@@ -118,6 +130,12 @@ public final class NetworkUtils {
         Picasso.with(context).load(url).into(imageView);
     }
 
+    /**
+     * Helper method for constructing the full path (URL) based on given movie's partial path.
+     * @param context The context for the caller (to pull in necessary Strings).
+     * @param movie The specific movie for which to get the cover photo URL.
+     * @return The fully constructed URL for the given movie's cover photo.
+     */
     private static String getImageUrl(Context context, Movie movie) {
         String baseUrl = context.getString(R.string.base_url);
         String imageSize = context.getString(R.string.image_size_url);
