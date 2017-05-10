@@ -12,4 +12,15 @@
 
     <!-- Empty/Error states -->
     <string name="empty_state">No data could be loaded.  Check your internet connection.</string>
+
+    <!-- DetailsActivity -->
+    <string name="tv_movie_title_placeholder">Working Title</string>
+    <string name="tv_release_date_placeholder">2015</string>
+    <string name="tv_duration_placeholder">120min</string>
+    <string name="tv_rating_placeholder">8.1/10</string>
+    <string name="tv_overview_placeholder">This is some placeholder text for the synopsis.</string>
+
+    <string name="button_mark_fave">Mark as\nfavorite</string>
+    <string name="details_action_bar_title">MovieDetail</string>
+
 </resources>

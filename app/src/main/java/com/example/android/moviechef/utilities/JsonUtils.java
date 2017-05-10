@@ -40,12 +40,14 @@ public final class JsonUtils {
                 String overview = setValueForKey(jsonMovie, "overview").toString();
                 String id = setValueForKey(jsonMovie, "id").toString();
                 String releaseDate = setValueForKey(jsonMovie, "release_date").toString();
+                String duration = setValueForKey(jsonMovie, "runtime").toString();
                 Double avgRating =
                         Double.parseDouble(setValueForKey(jsonMovie, "vote_average").toString());
 
                 Log.v("JsonUtils", title + "\n" + imageUrl + "\n" + overview + "\n" + id);
 
-                Movie movie = new Movie(title, imageUrl, overview, id, avgRating, releaseDate);
+                Movie movie =
+                        new Movie(title, imageUrl, overview, id, avgRating, releaseDate, duration);
                 movies.add(i, movie);
             }
         } else {

@@ -1,10 +1,12 @@
 package com.example.android.moviechef;
 
+import java.io.Serializable;
+
 /**
  * Represents a given movie object including basic information about the given film.
  */
 
-public final class Movie {
+public final class Movie implements Serializable {
     // The movie's title.
     private final String mTitle;
 
@@ -23,14 +25,18 @@ public final class Movie {
     // The movie's original release date.
     private final String mReleaseDate;
 
+    // The movie's runtime/duration.
+    private final String mDuration;
+
     public Movie(String title, String imageUrl, String overview,
-                 String id, Double avgRating, String releaseDate) {
+                 String id, Double avgRating, String releaseDate, String duration) {
         mTitle = title;
         mImageUrl = imageUrl;
         mOverview = overview;
         mId = id;
         mAvgRating = avgRating;
         mReleaseDate = releaseDate;
+        mDuration = duration;
     }
 
     /* Getters */
@@ -48,4 +54,6 @@ public final class Movie {
     public Double getmAvgRating() { return mAvgRating; }
 
     public String getmReleaseDate() { return mReleaseDate; }
+
+    public String getmDuration() { return mDuration; }
 }

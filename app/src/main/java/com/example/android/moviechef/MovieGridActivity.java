@@ -1,6 +1,7 @@
 package com.example.android.moviechef;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -78,7 +79,9 @@ public class MovieGridActivity extends AppCompatActivity
     @Override
     public void onClick(Movie movie) {
         Context context = this;
-        // TODO: do stuff when movie clicked ;)
+        Intent intent = new Intent(context, MovieDetailsActivity.class);
+        intent.putExtra("movie", movie);
+        startActivity(intent);
     }
 
     @Override
