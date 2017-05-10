@@ -1,25 +1,28 @@
 <resources>
     <string name="app_name">MovieChef</string>
 
+    <!-- MovieGridActivity strings -->
     <string name="iv_movie_cover">The cover photo for the given movie</string>
 
+    <!-- NetworkUtils strings for definining movie cover photo size and base path -->
     <string name="base_url">http://image.tmdb.org/t/p/</string>
     <string name="image_size_url">w342</string>
 
-    <!-- Menu options -->
+    <!-- Menu options MovieDetailsActivity -->
     <string name="sort_popular">Sort by most popular</string>
     <string name="sort_top_rated">Sort by top rated</string>
 
     <!-- Empty/Error states -->
     <string name="empty_state">No data could be loaded.  Check your internet connection.</string>
 
-    <!-- DetailsActivity -->
+    <!-- MovieDetailsActivity "placeholder" strings (for designing) -->
     <string name="tv_movie_title_placeholder">Working Title</string>
     <string name="tv_release_date_placeholder">2015</string>
     <string name="tv_duration_placeholder">120min</string>
     <string name="tv_rating_placeholder">8.1/10</string>
     <string name="tv_overview_placeholder">This is some placeholder text for the synopsis.</string>
 
+    <!-- MovieDetailsActivity "production" strings -->
     <string name="button_mark_fave">Mark as\nfavorite</string>
     <string name="details_action_bar_title">MovieDetail</string>
 
