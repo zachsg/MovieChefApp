@@ -64,7 +64,7 @@ public final class NetworkUtils {
                     urlString = MOVIES_BASE_URL_A + LATEST_MOVIES + MOVIES_BASE_URL_B;
             }
         } else {
-            // "sort" == a specific movie ID in thise case.
+            // "sort" == a specific movie ID in this case.
             urlString = MOVIES_BASE_URL_A + sort + MOVIES_BASE_URL_B;
         }
 

@@ -10,26 +10,26 @@
         android:id="@+id/tv_movie_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-        tools:text="@string/tv_movie_title_placeholder"
         android:background="@color/colorPrimaryLight"
-        android:textColor="@android:color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:paddingTop="24dp"
         android:paddingBottom="24dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:textSize="40sp" />
+        android:paddingTop="24dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+        android:textColor="@android:color/white"
+        android:textSize="40sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/tv_movie_title_placeholder" />
 
     <ScrollView
         android:id="@+id/sv_details"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_movie_title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_movie_title"
         tools:layout_editor_absoluteX="8dp">
 
         <android.support.constraint.ConstraintLayout
@@ -38,77 +38,77 @@
 
             <ImageView
                 android:id="@+id/iv_movie_cover"
-                android:contentDescription="@string/iv_movie_cover"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:adjustViewBounds="true"
-                android:layout_marginTop="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp" />
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/iv_movie_cover"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
 
             <TextView
                 android:id="@+id/tv_release_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/iv_movie_cover"
                 android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                tools:text="@string/tv_release_date_placeholder"
-                android:layout_marginStart="16dp" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                app:layout_constraintLeft_toRightOf="@+id/iv_movie_cover"
+                app:layout_constraintTop_toBottomOf="parent"
+                tools:text="@string/tv_release_date_placeholder" />
 
             <TextView
                 android:id="@+id/tv_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/tv_release_date"
-                app:layout_constraintLeft_toRightOf="@+id/iv_movie_cover"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:layout_marginTop="8dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textStyle="italic"
-                tools:text="@string/tv_duration_placeholder"
-                android:layout_marginStart="16dp" />
+                app:layout_constraintLeft_toRightOf="@+id/iv_movie_cover"
+                app:layout_constraintTop_toBottomOf="@+id/tv_release_date"
+                tools:text="@string/tv_duration_placeholder" />
 
             <TextView
                 android:id="@+id/tv_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/tv_duration"
-                app:layout_constraintLeft_toRightOf="@+id/iv_movie_cover"
-                android:layout_marginTop="8dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                tools:text="@string/tv_rating_placeholder"
-                android:layout_marginStart="16dp" />
+                app:layout_constraintLeft_toRightOf="@+id/iv_movie_cover"
+                app:layout_constraintTop_toBottomOf="@+id/tv_duration"
+                tools:text="@string/tv_rating_placeholder" />
 
             <Button
                 android:id="@+id/button_fave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_movie_cover"
-                app:layout_constraintLeft_toRightOf="@+id/iv_movie_cover"
-                android:layout_marginTop="8dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:background="@color/colorAccent"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:text="@string/button_mark_fave"
-                android:layout_marginStart="16dp" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_movie_cover"
+                app:layout_constraintLeft_toRightOf="@+id/iv_movie_cover" />
 
             <TextView
                 android:id="@+id/tv_overview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                app:layout_constraintTop_toBottomOf="@+id/iv_movie_cover"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginTop="24dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_movie_cover"
                 tools:text="@string/tv_overview_placeholder" />
 
         </android.support.constraint.ConstraintLayout>
@@ -119,17 +119,17 @@
         android:id="@+id/pb_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:visibility="invisible"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/tv_empty_state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:text="@string/empty_state" />
+        android:text="@string/empty_state"
+        android:visibility="invisible" />
 
 </android.support.constraint.ConstraintLayout>
