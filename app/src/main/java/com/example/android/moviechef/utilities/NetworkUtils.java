@@ -24,8 +24,6 @@ public final class NetworkUtils {
 
     private static final String LOG_TAG = NetworkUtils.class.getSimpleName();
 
-    private static final String MOVIES_STARTER_URL = "https://api.themoviedb.org/3/movie/";
-
     // TODO: Be sure to add your API_KEY here
     private static final String API_KEY_BASE = "";
     private static final String API_KEY_QUERY = "?api_key=";
@@ -35,7 +33,7 @@ public final class NetworkUtils {
     private static final String LANGUAGE = "&language=en-US&page=1";
 
     // Based URL strings, Part 1 (A) & Part 2 (B)
-    private static final String MOVIES_BASE_URL_A = MOVIES_STARTER_URL;
+    private static final String MOVIES_BASE_URL_A = "https://api.themoviedb.org/3/movie/";
     private static final String MOVIES_BASE_URL_B = API_KEY + LANGUAGE;
 
     // Sorting methods
@@ -66,6 +64,7 @@ public final class NetworkUtils {
                     urlString = MOVIES_BASE_URL_A + LATEST_MOVIES + MOVIES_BASE_URL_B;
             }
         } else {
+            // "sort" == a specific movie ID in thise case.
             urlString = MOVIES_BASE_URL_A + sort + MOVIES_BASE_URL_B;
         }
 
