@@ -3,6 +3,11 @@ package com.example.android.moviechef.utilities;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.widget.ImageView;
+
+import com.example.android.moviechef.Movie;
+import com.example.android.moviechef.R;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -102,5 +107,20 @@ public final class NetworkUtils {
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
         return networkInfo != null && networkInfo.isConnected();
+    }
+
+    public static void loadImage(Context context, ImageView imageView, Movie movie) {
+        String url = getImageUrl(context, movie);
+
+        // Set proper image for given movie
+        Picasso.with(context).load(url).into(imageView);
+    }
+
+    private static String getImageUrl(Context context, Movie movie) {
+        String baseUrl = context.getString(R.string.base_url);
+        String imageSize = context.getString(R.string.image_size_url);
+        String imageUrl = movie.getmImageUrl();
+
+        return baseUrl + imageSize + imageUrl;
     }
 }

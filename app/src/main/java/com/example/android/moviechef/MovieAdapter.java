@@ -2,6 +2,7 @@ package com.example.android.moviechef;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.net.NetworkInfo;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.example.android.moviechef.utilities.NetworkUtils;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -52,14 +54,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
 
     @Override
     public void onBindViewHolder(MovieAdapterViewHolder holder, int position) {
-        // Get current movie's image URL
+        // Get current movie
         Movie currentMovie = mMoviesData[position];
-        String imageUrl = holder.getImageUrl(currentMovie);
 
-        // Set proper image for given movie
+        // Get context and current ImageView for loading photo
         Context context = holder.getmImageView().getContext();
         ImageView imageView = holder.getmImageView();
-        Picasso.with(context).load(imageUrl).into(imageView);
+
+        // Load image from the current movie into the proper ImageView
+        NetworkUtils.loadImage(context, imageView, currentMovie);
     }
 
     @Override
