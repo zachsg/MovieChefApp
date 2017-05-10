@@ -35,14 +35,17 @@ public final class JsonUtils {
                 // Get a single movie
                 JSONObject jsonMovie = moviesJsonArray.getJSONObject(i);
 
-                String title = setValueForKey(jsonMovie, "title");
-                String imageUrl = setValueForKey(jsonMovie, "poster_path");
-                String overview = setValueForKey(jsonMovie, "overview");
-                String id = setValueForKey(jsonMovie, "id");
+                String title = setValueForKey(jsonMovie, "title").toString();
+                String imageUrl = setValueForKey(jsonMovie, "poster_path").toString();
+                String overview = setValueForKey(jsonMovie, "overview").toString();
+                String id = setValueForKey(jsonMovie, "id").toString();
+                String releaseDate = setValueForKey(jsonMovie, "release_date").toString();
+                Double avgRating =
+                        Double.parseDouble(setValueForKey(jsonMovie, "vote_average").toString());
 
                 Log.v("JsonUtils", title + "\n" + imageUrl + "\n" + overview + "\n" + id);
 
-                Movie movie = new Movie(title, imageUrl, overview, id);
+                Movie movie = new Movie(title, imageUrl, overview, id, avgRating, releaseDate);
                 movies.add(i, movie);
             }
         } else {
@@ -57,16 +60,28 @@ public final class JsonUtils {
      * @param key The key to be looked up in the movie JSON object.
      * @return The value for the key in the given JSON movie object.
      */
-    private static String setValueForKey(JSONObject movie, String key) {
+    private static Object setValueForKey(JSONObject movie, String key) {
         if (movie.has(key)) {
             try {
-                return movie.getString(key);
+                if (key.equals("vote_average")) {
+                    return movie.getDouble(key);
+                } else {
+                    return movie.getString(key);
+                }
             } catch (JSONException jse) {
                 jse.printStackTrace();
-                return "n/a";
+                if (key.equals("vote_average")) {
+                    return 0.0;
+                } else {
+                    return "n/a";
+                }
             }
         } else {
-            return "n/a";
+            if (key.equals("vote_average")) {
+                return 0.0;
+            } else {
+                return "n/a";
+            }
         }
     }
 }
