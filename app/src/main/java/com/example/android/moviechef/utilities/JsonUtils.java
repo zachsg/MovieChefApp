@@ -44,8 +44,6 @@ public final class JsonUtils {
                 Double avgRating =
                         Double.parseDouble(setValueForKey(jsonMovie, "vote_average").toString());
 
-                Log.v("JsonUtils", title + "\n" + imageUrl + "\n" + overview + "\n" + id);
-
                 Movie movie =
                         new Movie(title, imageUrl, overview, id, avgRating, releaseDate, duration);
                 movies.add(i, movie);
@@ -85,5 +83,21 @@ public final class JsonUtils {
                 return "n/a";
             }
         }
+    }
+
+    public static Movie getMovieDetails(Context context, String movieString)
+                                                        throws JSONException {
+        JSONObject movieJSON = new JSONObject(movieString);
+
+        String title = setValueForKey(movieJSON, "title").toString();
+        String imageUrl = setValueForKey(movieJSON, "poster_path").toString();
+        String overview = setValueForKey(movieJSON, "overview").toString();
+        String id = setValueForKey(movieJSON, "id").toString();
+        String releaseDate = setValueForKey(movieJSON, "release_date").toString();
+        String duration = setValueForKey(movieJSON, "runtime").toString();
+        Double avgRating =
+                Double.parseDouble(setValueForKey(movieJSON, "vote_average").toString());
+
+        return new Movie(title, imageUrl, overview, id, avgRating, releaseDate, duration);
     }
 }

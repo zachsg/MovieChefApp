@@ -48,7 +48,7 @@ public final class NetworkUtils {
 
         if (sort == null) {
             urlString = MOVIES_BASE_URL_A + LATEST_MOVIES + MOVIES_BASE_URL_B;
-        } else {
+        } else if (sort.equals(POPULAR_MOVIES) || sort.equals(TOP_RATED_MOVIES)) {
             switch (sort) {
                 case POPULAR_MOVIES:
                     urlString = MOVIES_BASE_URL_A + POPULAR_MOVIES + MOVIES_BASE_URL_B;
@@ -59,6 +59,8 @@ public final class NetworkUtils {
                 default:
                     urlString = MOVIES_BASE_URL_A + LATEST_MOVIES + MOVIES_BASE_URL_B;
             }
+        } else {
+            urlString = MOVIES_BASE_URL_A + sort + MOVIES_BASE_URL_B;
         }
 
         URL url = null;
