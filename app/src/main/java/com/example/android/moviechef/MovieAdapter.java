@@ -1,18 +1,14 @@
 package com.example.android.moviechef;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.net.NetworkInfo;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.android.moviechef.utilities.NetworkUtils;
-import com.squareup.picasso.Picasso;
 
 /**
  * Created by zachg on 5/6/17.
