@@ -21,12 +21,18 @@ import org.w3c.dom.Text;
 import java.io.IOException;
 import java.net.URL;
 
+/**
+ * For when a movie is being viewed in the details view.
+ */
+
 public class MovieDetailsActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MovieDetailsActivity.class.getSimpleName();
 
-    private TextView mTitleTV;
+    // Holds the movie's cover photo/image.
     private ImageView mCoverIV;
+
+    private TextView mTitleTV;
     private TextView mReleaseDateTV;
     private TextView mDurationTV;
     private TextView mRatingTV;
@@ -55,28 +61,46 @@ public class MovieDetailsActivity extends AppCompatActivity {
         mProgressBar = (ProgressBar) findViewById(R.id.pb_details);
         mScrollView = (ScrollView) findViewById(R.id.sv_details);
 
+        // Ensure progress bar is hidden no matter what until we decide whether to fetch data.
+        mProgressBar.setVisibility(View.INVISIBLE);
+
         /*
          * If network is up & we have a valid movie ID, fetch the additional details
          * on the movie that we need from the server, otherwise just return what we
          * already know about the given film.
          */
-        mProgressBar.setVisibility(View.INVISIBLE);
         if (NetworkUtils.isNetworkUp(this) && movie.getmId() != null) {
             // Need to fetch runtime/duration details from server :/
             loadMovieDetails(movie);
         } else {
+            /* No network connection available (or no Movie ID for some reason)
+             * so just load whatever data we already know we have.
+             */
             checkAndSet(this, movie);
         }
     }
 
+    /**
+     * Helper method to setup UI & kick off background task to fetch new data.
+     * @param movie The movie for which to fetch new data.
+     */
     private void loadMovieDetails(Movie movie) {
+        // Show the progress bar.
         mProgressBar.setVisibility(View.VISIBLE);
+
+        // Hide the other elements of the view until we've loaded data.
         mScrollView.setVisibility(View.INVISIBLE);
         mTitleTV.setVisibility(View.INVISIBLE);
 
+        // Kick off background task with the specific Movie ID.
         new FetchDetailsTask().execute(movie.getmId());
     }
 
+    /**
+     * Validation of Movie data and subsequent setting of UI with that data.
+     * @param context The context of the caller (MovieDetailsActivity in this case).
+     * @param movie The specific movie being used to populate the UI.
+     */
     private void checkAndSet(Context context, Movie movie) {
         if (movie.getmImageUrl() != null) {
             NetworkUtils.loadImage(context, mCoverIV, movie);
@@ -113,6 +137,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
             String jsonResponse = "";
             try {
+                // Get the JSON from the server for our Movie-specific URL.
                 jsonResponse = NetworkUtils.getResponseFromHttpUrl(url);
             } catch (IOException ioe) {
                 ioe.printStackTrace();
@@ -120,6 +145,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             }
 
             try {
+                // Return the Movie object with the info pulled from the server.
                 return JsonUtils.getMovieDetails(jsonResponse);
             } catch (JSONException jse) {
                 jse.printStackTrace();
@@ -129,10 +155,14 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Movie movie) {
+            // Data pulled, hid the progress bar.
             mProgressBar.setVisibility(View.INVISIBLE);
+
+            // Background task is complete, show the previously hidden UI elements.
             mTitleTV.setVisibility(View.VISIBLE);
             mScrollView.setVisibility(View.VISIBLE);
 
+            // Set the Views to have the newly fetched Movie data.
             checkAndSet(MovieDetailsActivity.this, movie);
         }
     }
