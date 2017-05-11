@@ -1,6 +1,5 @@
 package com.example.android.moviechef.utilities;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.example.android.moviechef.Movie;
