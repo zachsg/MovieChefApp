@@ -148,7 +148,7 @@ public class MovieGridActivity extends AppCompatActivity
 
             Movie[] movies = null;
             try {
-                List<Movie> moviesList = JsonUtils.getMoviesFromJson(MovieGridActivity.this, jsonResponse);
+                List<Movie> moviesList = JsonUtils.getMoviesFromJson(jsonResponse);
                 movies = moviesList.toArray(new Movie[0]);
             } catch (JSONException jse) {
                 jse.printStackTrace();

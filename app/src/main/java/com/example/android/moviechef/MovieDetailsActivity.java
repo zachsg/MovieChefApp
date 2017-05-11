@@ -120,7 +120,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             }
 
             try {
-                return JsonUtils.getMovieDetails(MovieDetailsActivity.this, jsonResponse);
+                return JsonUtils.getMovieDetails(jsonResponse);
             } catch (JSONException jse) {
                 jse.printStackTrace();
                 return null;

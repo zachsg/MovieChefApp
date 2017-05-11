@@ -18,10 +18,16 @@ import java.util.List;
 
 public final class JsonUtils {
 
-    public static List<Movie> getMoviesFromJson(Context context, String moviesString)
+    /**
+     * Take a string representation of movies and return a list of individual Movie objects.
+     * @param moviesString The movies retrieved from the server in String format.
+     * @return The parsed list of Movie objects from passed moviesString.
+     * @throws JSONException In case conversion of moviesString to moviesJsonFull fails.
+     */
+    public static List<Movie> getMoviesFromJson(String moviesString)
         throws JSONException {
 
-        // Base level array of all movies returned by query
+        // Base level JSON array of all movies returned by query from themoviedb.org API.
         final String RESULTS = "results";
 
         List<Movie> movies = new ArrayList<>();
@@ -31,6 +37,9 @@ public final class JsonUtils {
             // Parse out the array of movies from the full request
             JSONArray moviesJsonArray = moviesJsonFull.getJSONArray(RESULTS);
 
+            /* Parse out each Movie from the JSON array and add it to list of Movie objects
+             * to be returned.
+             */
             for (int i = 0; i < moviesJsonArray.length(); i++) {
                 // Get a single movie
                 JSONObject jsonMovie = moviesJsonArray.getJSONObject(i);
@@ -44,11 +53,14 @@ public final class JsonUtils {
                 Double avgRating =
                         Double.parseDouble(setValueForKey(jsonMovie, "vote_average").toString());
 
+                // Construct new Movie object with the parsed info.
                 Movie movie =
                         new Movie(title, imageUrl, overview, id, avgRating, releaseDate, duration);
+
                 movies.add(i, movie);
             }
         } else {
+            // Something went wrong with parsing the String of JSON data.  Can't do anything.
             Log.v("JsonUtils", "No valid movies found in JSON :(");
         }
         return movies;
@@ -63,6 +75,7 @@ public final class JsonUtils {
     private static Object setValueForKey(JSONObject movie, String key) {
         if (movie.has(key)) {
             try {
+                // Cases are unique when key is average rating since they're Doubles vs Strings.
                 if (key.equals("vote_average")) {
                     return movie.getDouble(key);
                 } else {
@@ -85,8 +98,14 @@ public final class JsonUtils {
         }
     }
 
-    public static Movie getMovieDetails(Context context, String movieString)
-                                                        throws JSONException {
+    /**
+     * Parse out detailed info from a single Movie object.
+     * @param movieString The movie from which to parse details.
+     * @return The Movie object constructed from the parsed details.
+     * @throws JSONException In the event there is an error converting
+     *                       the passed String to a JSONObject.
+     */
+    public static Movie getMovieDetails(String movieString) throws JSONException {
         JSONObject movieJSON = new JSONObject(movieString);
 
         String title = setValueForKey(movieJSON, "title").toString();
