@@ -12,14 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MovieGridActivity">
+        <activity
+            android:name=".MovieGridActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MovieDetailsActivity"
+        <activity
+            android:name=".MovieDetailsActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MovieGridActivity"
             android:label="@string/details_action_bar_title">
         </activity>

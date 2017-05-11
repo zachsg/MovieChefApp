@@ -112,7 +112,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             mReleaseDateTV.setText(movie.getmReleaseDate().split("-")[0]);
         }
         if (movie.getmDuration() != null) {
-            mDurationTV.setText(movie.getmDuration());
+            mDurationTV.setText(movie.getmDuration() + "min");
         }
         if (movie.getmAvgRating() != null ) {
             mRatingTV.setText(movie.getmAvgRating().toString() + "/10");

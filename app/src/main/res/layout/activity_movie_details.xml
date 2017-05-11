@@ -17,7 +17,7 @@
         android:paddingTop="24dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
         android:textColor="@android:color/white"
-        android:textSize="40sp"
+        android:textSize="32sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -94,6 +94,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@color/colorAccent"
                 android:text="@string/button_mark_fave"
+                android:textAllCaps="true"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_movie_cover"
                 app:layout_constraintLeft_toRightOf="@+id/iv_movie_cover" />
